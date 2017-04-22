@@ -1,0 +1,2134 @@
+<div class="apidocDiv">
+<style>
+/*csslint
+*/
+.apidocDiv {
+    background: #fff;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.apidocDiv a[href] {
+    color: #33f;
+    font-weight: bold;
+    text-decoration: none;
+}
+.apidocDiv a[href]:hover {
+    text-decoration: underline;
+}
+.apidocCodeCommentSpan {
+    background: #bbf;
+    color: #000;
+    display: block;
+}
+.apidocCodeKeywordSpan {
+    color: #d00;
+    font-weight: bold;
+}
+.apidocCodePre {
+    background: #eef;
+    border: 1px solid;
+    color: #777;
+    padding: 5px;
+    white-space: pre-wrap;
+}
+.apidocFooterDiv {
+    margin-top: 20px;
+    text-align: center;
+}
+.apidocModuleLi {
+    margin-top: 10px;
+}
+.apidocSectionDiv {
+    border-top: 1px solid;
+    margin-top: 20px;
+}
+.apidocSignatureSpan {
+    color: #777;
+    font-weight: bold;
+}
+</style>
+<h1>api documentation for
+    <a
+
+        href="http://github.com/postaljs/postal.js"
+
+    >postal (v2.0.5)</a>
+</h1>
+<h4>Pub/Sub library providing wildcard subscriptions, complex message handling, etc.  Works server and client-side.</h4>
+<div class="apidocSectionDiv"><a
+    href="#apidoc.tableOfContents"
+    id="apidoc.tableOfContents"
+><h1>table of contents</h1></a><ol>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.postal">module postal</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.postal.ChannelDefinition">
+            function <span class="apidocSignatureSpan">postal.</span>ChannelDefinition
+            <span class="apidocSignatureSpan">( channelName, bus )</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.postal.SubscriptionDefinition">
+            function <span class="apidocSignatureSpan">postal.</span>SubscriptionDefinition
+            <span class="apidocSignatureSpan">( channel, topic, callback )</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.postal.addWireTap">
+            function <span class="apidocSignatureSpan">postal.</span>addWireTap
+            <span class="apidocSignatureSpan">( callback )</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.postal.channel">
+            function <span class="apidocSignatureSpan">postal.</span>channel
+            <span class="apidocSignatureSpan">( channelName )</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.postal.getSubscribersFor">
+            function <span class="apidocSignatureSpan">postal.</span>getSubscribersFor
+            <span class="apidocSignatureSpan">( options )</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.postal.noConflict">
+            function <span class="apidocSignatureSpan">postal.</span>noConflict
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.postal.publish">
+            function <span class="apidocSignatureSpan">postal.</span>publish
+            <span class="apidocSignatureSpan">( envelope, cb )</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.postal.reset">
+            function <span class="apidocSignatureSpan">postal.</span>reset
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.postal.subscribe">
+            function <span class="apidocSignatureSpan">postal.</span>subscribe
+            <span class="apidocSignatureSpan">( options )</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.postal.unsubscribe">
+            function <span class="apidocSignatureSpan">postal.</span>unsubscribe
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.postal.unsubscribeFor">
+            function <span class="apidocSignatureSpan">postal.</span>unsubscribeFor
+            <span class="apidocSignatureSpan">( options )</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">postal.</span>ChannelDefinition.prototype</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">postal.</span>SubscriptionDefinition.prototype</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">postal.</span>cache</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">postal.</span>configuration</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">postal.</span>postal_lodash</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">postal.</span>subscriptions</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">postal.</span>wireTaps</span>
+
+        </li>
+
+    </ol></li>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.postal.ChannelDefinition">module postal.ChannelDefinition</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.postal.ChannelDefinition.ChannelDefinition">
+            function <span class="apidocSignatureSpan">postal.</span>ChannelDefinition
+            <span class="apidocSignatureSpan">( channelName, bus )</span>
+            </a>
+
+        </li>
+
+    </ol></li>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.postal.ChannelDefinition.prototype">module postal.ChannelDefinition.prototype</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.postal.ChannelDefinition.prototype.publish">
+            function <span class="apidocSignatureSpan">postal.ChannelDefinition.prototype.</span>publish
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.postal.ChannelDefinition.prototype.subscribe">
+            function <span class="apidocSignatureSpan">postal.ChannelDefinition.prototype.</span>subscribe
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+    </ol></li>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.postal.SubscriptionDefinition">module postal.SubscriptionDefinition</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.postal.SubscriptionDefinition.SubscriptionDefinition">
+            function <span class="apidocSignatureSpan">postal.</span>SubscriptionDefinition
+            <span class="apidocSignatureSpan">( channel, topic, callback )</span>
+            </a>
+
+        </li>
+
+    </ol></li>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.postal.SubscriptionDefinition.prototype">module postal.SubscriptionDefinition.prototype</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.postal.SubscriptionDefinition.prototype.catch">
+            function <span class="apidocSignatureSpan">postal.SubscriptionDefinition.prototype.</span>catch
+            <span class="apidocSignatureSpan">( errorHandler )</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.postal.SubscriptionDefinition.prototype.constraint">
+            function <span class="apidocSignatureSpan">postal.SubscriptionDefinition.prototype.</span>constraint
+            <span class="apidocSignatureSpan">( predicate )</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.postal.SubscriptionDefinition.prototype.constraints">
+            function <span class="apidocSignatureSpan">postal.SubscriptionDefinition.prototype.</span>constraints
+            <span class="apidocSignatureSpan">( predicates )</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.postal.SubscriptionDefinition.prototype.context">
+            function <span class="apidocSignatureSpan">postal.SubscriptionDefinition.prototype.</span>context
+            <span class="apidocSignatureSpan">( context )</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.postal.SubscriptionDefinition.prototype.debounce">
+            function <span class="apidocSignatureSpan">postal.SubscriptionDefinition.prototype.</span>debounce
+            <span class="apidocSignatureSpan">( milliseconds, immediate )</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.postal.SubscriptionDefinition.prototype.defer">
+            function <span class="apidocSignatureSpan">postal.SubscriptionDefinition.prototype.</span>defer
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.postal.SubscriptionDefinition.prototype.delay">
+            function <span class="apidocSignatureSpan">postal.SubscriptionDefinition.prototype.</span>delay
+            <span class="apidocSignatureSpan">( milliseconds )</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.postal.SubscriptionDefinition.prototype.disposeAfter">
+            function <span class="apidocSignatureSpan">postal.SubscriptionDefinition.prototype.</span>disposeAfter
+            <span class="apidocSignatureSpan">( maxCalls )</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.postal.SubscriptionDefinition.prototype.distinct">
+            function <span class="apidocSignatureSpan">postal.SubscriptionDefinition.prototype.</span>distinct
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.postal.SubscriptionDefinition.prototype.distinctUntilChanged">
+            function <span class="apidocSignatureSpan">postal.SubscriptionDefinition.prototype.</span>distinctUntilChanged
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.postal.SubscriptionDefinition.prototype.invokeSubscriber">
+            function <span class="apidocSignatureSpan">postal.SubscriptionDefinition.prototype.</span>invokeSubscriber
+            <span class="apidocSignatureSpan">( data, env )</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.postal.SubscriptionDefinition.prototype.logError">
+            function <span class="apidocSignatureSpan">postal.SubscriptionDefinition.prototype.</span>logError
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.postal.SubscriptionDefinition.prototype.once">
+            function <span class="apidocSignatureSpan">postal.SubscriptionDefinition.prototype.</span>once
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.postal.SubscriptionDefinition.prototype.subscribe">
+            function <span class="apidocSignatureSpan">postal.SubscriptionDefinition.prototype.</span>subscribe
+            <span class="apidocSignatureSpan">( callback )</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.postal.SubscriptionDefinition.prototype.throttle">
+            function <span class="apidocSignatureSpan">postal.SubscriptionDefinition.prototype.</span>throttle
+            <span class="apidocSignatureSpan">( milliseconds )</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.postal.SubscriptionDefinition.prototype.unsubscribe">
+            function <span class="apidocSignatureSpan">postal.SubscriptionDefinition.prototype.</span>unsubscribe
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+    </ol></li>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.postal.postal_lodash">module postal.postal_lodash</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.postal.postal_lodash.ChannelDefinition">
+            function <span class="apidocSignatureSpan">postal.postal_lodash.</span>ChannelDefinition
+            <span class="apidocSignatureSpan">( channelName, bus )</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.postal.postal_lodash.SubscriptionDefinition">
+            function <span class="apidocSignatureSpan">postal.postal_lodash.</span>SubscriptionDefinition
+            <span class="apidocSignatureSpan">( channel, topic, callback )</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.postal.postal_lodash.addWireTap">
+            function <span class="apidocSignatureSpan">postal.postal_lodash.</span>addWireTap
+            <span class="apidocSignatureSpan">( callback )</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.postal.postal_lodash.channel">
+            function <span class="apidocSignatureSpan">postal.postal_lodash.</span>channel
+            <span class="apidocSignatureSpan">( channelName )</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.postal.postal_lodash.getSubscribersFor">
+            function <span class="apidocSignatureSpan">postal.postal_lodash.</span>getSubscribersFor
+            <span class="apidocSignatureSpan">( options )</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.postal.postal_lodash.noConflict">
+            function <span class="apidocSignatureSpan">postal.postal_lodash.</span>noConflict
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.postal.postal_lodash.publish">
+            function <span class="apidocSignatureSpan">postal.postal_lodash.</span>publish
+            <span class="apidocSignatureSpan">( envelope, cb )</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.postal.postal_lodash.reset">
+            function <span class="apidocSignatureSpan">postal.postal_lodash.</span>reset
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.postal.postal_lodash.subscribe">
+            function <span class="apidocSignatureSpan">postal.postal_lodash.</span>subscribe
+            <span class="apidocSignatureSpan">( options )</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.postal.postal_lodash.unsubscribe">
+            function <span class="apidocSignatureSpan">postal.postal_lodash.</span>unsubscribe
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.postal.postal_lodash.unsubscribeFor">
+            function <span class="apidocSignatureSpan">postal.postal_lodash.</span>unsubscribeFor
+            <span class="apidocSignatureSpan">( options )</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">postal.postal_lodash.</span>cache</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">postal.postal_lodash.</span>configuration</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">postal.postal_lodash.</span>subscriptions</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">postal.postal_lodash.</span>wireTaps</span>
+
+        </li>
+
+    </ol></li>
+
+</ol></div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.postal" id="apidoc.module.postal">module postal</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.postal.ChannelDefinition" id="apidoc.element.postal.ChannelDefinition">
+        function <span class="apidocSignatureSpan">postal.</span>ChannelDefinition
+        <span class="apidocSignatureSpan">( channelName, bus )</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">ChannelDefinition = function ( channelName, bus ) {
+	this.bus = bus;
+	this.channel = channelName || _config.DEFAULT_CHANNEL;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.postal.SubscriptionDefinition" id="apidoc.element.postal.SubscriptionDefinition">
+        function <span class="apidocSignatureSpan">postal.</span>SubscriptionDefinition
+        <span class="apidocSignatureSpan">( channel, topic, callback )</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">SubscriptionDefinition = function ( channel, topic, callback ) {
+	if ( arguments.length !== 3 ) {
+		throw new Error( &#x22;You must provide a channel, topic and callback when creating a SubscriptionDefinition instance.&#x22; );
+	}
+	if ( topic.length === 0 ) {
+		throw new Error( &#x22;Topics cannot be empty&#x22; );
+	}
+	this.channel = channel;
+	this.topic = topic;
+	this.callback = callback;
+	this.pipeline = [];
+	this.cacheKeys = [];
+	this._context = undefined;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.postal.addWireTap" id="apidoc.element.postal.addWireTap">
+        function <span class="apidocSignatureSpan">postal.</span>addWireTap
+        <span class="apidocSignatureSpan">( callback )</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function addWireTap( callback ) {
+		var self = this;
+		self.wireTaps.push( callback );
+		return function() {
+			var idx = self.wireTaps.indexOf( callback );
+			if ( idx !== -1 ) {
+				self.wireTaps.splice( idx, 1 );
+			}
+		};
+	}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.postal.channel" id="apidoc.element.postal.channel">
+        function <span class="apidocSignatureSpan">postal.</span>channel
+        <span class="apidocSignatureSpan">( channelName )</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function channel( channelName ) {
+		return new ChannelDefinition( channelName, this );
+	}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+
+### Channels? WAT?
+A channel is a logical partition of topics. Conceptually, it&#x27;s like a dedicated highway for a specific set of communication
+. At first glance it might seem like that&#x27;s overkill for an environment that runs in an event loop, but it actually proves
+to be quite useful. Every library has architectural opinions that it either imposes or nudges you toward. Channel-oriented messaging
+ nudges you to separate your communication by bounded context, and enables the kind of fine-tuned visibility you need into the interactions
+ between components as your application grows.
+
+While the above code snippets work just fine, it&#x27;s possible to get a more terse API if you want to hang onto an `ChannelDefinition
+` instance - which is really a convenience wrapper around publishing and subscribing on a specific channel (instead of having to
+ specify it each time):
+
+```javascript
+	var channel = postal.<span class="apidocCodeKeywordSpan">channel</span>(&#x22;orders&#x22;);
+
+	var subscription = channel.subscribe(&#x22;item.add&#x22;, function(data, envelope) {
+		/*do stuff with data */
+	});
+
+	channel.publish(&#x22;item.add&#x22;, {
+sku: &#x22;AZDTF4346&#x22;,
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.postal.getSubscribersFor" id="apidoc.element.postal.getSubscribersFor">
+        function <span class="apidocSignatureSpan">postal.</span>getSubscribersFor
+        <span class="apidocSignatureSpan">( options )</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function getSubscribersFor( options ) {
+		var result = [];
+		var self = this;
+		_.each( self.subscriptions, function( channel ) {
+			_.each( channel, function( subList ) {
+				result = result.concat( _.filter( subList, getPredicate( options, _config.resolver ) ) );
+			} );
+		} );
+		return result;
+	}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+					( typeof options.binding === &#x22;undefined&#x22; || options.binding === binding ) ) {
+				delete self.cache[ key ];
+			}
+		};
+
+		var compactPredicate = function( val, key ) {
+			var split = key.split( keyDelimiter );
+			if ( postal.<span class="apidocCodeKeywordSpan">getSubscribersFor</span>( { topic: split[ 0 ] } ).length === 0 ) {
+				delete self.cache[ key ];
+			}
+		};
+
+		if ( typeof options === &#x22;undefined&#x22; ) {
+			this.reset();
+		} else {
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.postal.noConflict" id="apidoc.element.postal.noConflict">
+        function <span class="apidocSignatureSpan">postal.</span>noConflict
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function noConflict() {
+		
+		if ( typeof window === &#x22;undefined&#x22; || ( typeof window !== &#x22;undefined&#x22; &#x26;&#x26; typeof define === &#x22;function&#x22; &#x26;&#x26; define.amd ) ) {
+			throw new Error( &#x22;noConflict can only be used in browser clients which aren&#x27;t using AMD modules&#x22; );
+		}
+		global.postal = prevPostal;
+		return this;
+	}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.postal.publish" id="apidoc.element.postal.publish">
+        function <span class="apidocSignatureSpan">postal.</span>publish
+        <span class="apidocSignatureSpan">( envelope, cb )</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function publish( envelope, cb ) {
+		++pubInProgress;
+		var channel = envelope.channel = envelope.channel || _config.DEFAULT_CHANNEL;
+		var topic = envelope.topic;
+		envelope.timeStamp = new Date();
+		if ( this.wireTaps.length ) {
+			_.each( this.wireTaps, function( tap ) {
+				tap( envelope.data, envelope, pubInProgress );
+			} );
+		}
+		var cacheKey = channel + _config.cacheKeyDelimiter + topic;
+		var cache = this.cache[ cacheKey ];
+		var skipped = 0;
+		var activated = 0;
+		if ( !cache ) {
+			var cacherFn = getCacher(
+				topic,
+				this.cache,
+				cacheKey,
+				function( candidate ) {
+					if ( candidate.invokeSubscriber( envelope.data, envelope ) ) {
+						activated++;
+					} else {
+						skipped++;
+					}
+				},
+				envelope
+			);
+			_.each( this.subscriptions[ channel ], function( candidates ) {
+				_.each( candidates, cacherFn );
+			} );
+		} else {
+			_.each( cache, function( subDef ) {
+				if ( subDef.invokeSubscriber( envelope.data, envelope ) ) {
+					activated++;
+				} else {
+					skipped++;
+				}
+			} );
+		}
+		if ( --pubInProgress === 0 ) {
+			clearUnSubQueue();
+		}
+		if ( cb ) {
+			cb( {
+				activated: activated,
+				skipped: skipped
+			} );
+		}
+	}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+		}
+	});
+```
+
+The publisher might do something similar to this:
+
+```javascript
+	postal.<span class="apidocCodeKeywordSpan">publish</span>({
+	    channel: &#x22;orders&#x22;,
+	    topic: &#x22;item.add&#x22;,
+	    data: {
+	        sku: &#x22;AZDTF4346&#x22;,
+	        qty: 21
+	    }
+	});
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.postal.reset" id="apidoc.element.postal.reset">
+        function <span class="apidocSignatureSpan">postal.</span>reset
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function reset() {
+		this.unsubscribeFor();
+		_config.resolver.reset();
+		this.subscriptions = {};
+		this.cache = {};
+	}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+			var split = key.split( keyDelimiter );
+			if ( postal.getSubscribersFor( { topic: split[ 0 ] } ).length === 0 ) {
+				delete self.cache[ key ];
+			}
+		};
+
+		if ( typeof options === &#x22;undefined&#x22; ) {
+			this.<span class="apidocCodeKeywordSpan">reset</span>();
+		} else {
+			var handler = options.compact === true ? compactPredicate : matchPredicate;
+			_.each( this.cache, handler );
+		}
+	}
+};
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.postal.subscribe" id="apidoc.element.postal.subscribe">
+        function <span class="apidocSignatureSpan">postal.</span>subscribe
+        <span class="apidocSignatureSpan">( options )</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function subscribe( options ) {
+		var subscriptions = this.subscriptions;
+		var subDef = new SubscriptionDefinition( options.channel || _config.DEFAULT_CHANNEL, options.topic, options.callback );
+		var channel = subscriptions[ subDef.channel ];
+		var channelLen = subDef.channel.length;
+		var subs;
+		if ( !channel ) {
+			channel = subscriptions[ subDef.channel ] = {};
+		}
+		subs = subscriptions[ subDef.channel ][ subDef.topic ];
+		if ( !subs ) {
+			subs = subscriptions[ subDef.channel ][ subDef.topic ] = [];
+		}
+		// First, add the SubscriptionDefinition to the channel list
+		subs.push( subDef );
+		// Next, add the SubscriptionDefinition to any relevant existing cache(s)
+		var cache = this.cache;
+		_.each( _.keys( cache ), function( cacheKey ) {
+			if ( cacheKey.substr( 0, channelLen ) === subDef.channel ) {
+				getCacher(
+					cacheKey.split( _config.cacheKeyDelimiter )[1],
+					cache,
+					cacheKey )( subDef );
+			}
+		} );
+		
+		if ( _config.enableSystemMessages ) {
+			this.publish( sysCreatedMessage( subDef ) );
+		}
+		return subDef;
+	}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+## What is it?
+Postal.js is an in-memory message bus - very loosely inspired by [AMQP](http://www.amqp.org/) - written in JavaScript. Postal.js
+ runs in the browser, or on the server using node.js. It takes the familiar &#x22;eventing-style&#x22; paradigm (of which most JavaScript
+ developers are familiar) and extends it by providing &#x22;broker&#x22; and subscriber implementations which are more sophisticated
+ than what you typically find in simple event emitting/aggregation.
+
+## Usage - at a glance
+If you want to subscribe to a message, you tell postal what channel and topic to listen on (channel is optional, as postal provides
+ a default one if you don&#x27;t), and a callback to be invoked when a message arrives:
+
+```javascript
+	var subscription = postal.<span class="apidocCodeKeywordSpan">subscribe</span>({
+		channel: &#x22;orders&#x22;,
+		topic: &#x22;item.add&#x22;,
+		callback: function(data, envelope) {
+			// `data` is the data published by the publisher.
+			// `envelope` is a wrapper around the data &#x26; contains
+			// metadata about the message like the channel, topic,
+			// timestamp and any other data which might have been
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.postal.unsubscribe" id="apidoc.element.postal.unsubscribe">
+        function <span class="apidocSignatureSpan">postal.</span>unsubscribe
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function unsubscribe() {
+		var unSubLen = arguments.length;
+		var unSubIdx = 0;
+		var subDef;
+		var channelSubs;
+		var topicSubs;
+		var idx;
+		for ( ; unSubIdx &#x3c; unSubLen; unSubIdx++ ) {
+			subDef = arguments[ unSubIdx ];
+			subDef.inactive = true;
+			if ( pubInProgress ) {
+				unSubQueue.push( subDef );
+				return;
+			}
+			channelSubs = this.subscriptions[ subDef.channel ];
+			topicSubs = channelSubs &#x26;&#x26; channelSubs[ subDef.topic ];
+			
+			if ( topicSubs ) {
+				var len = topicSubs.length;
+				idx = 0;
+				// remove SubscriptionDefinition from channel list
+				while ( idx &#x3c; len ) {
+					
+					if ( topicSubs[ idx ] === subDef ) {
+						topicSubs.splice( idx, 1 );
+						break;
+					}
+					idx += 1;
+				}
+				if ( topicSubs.length === 0 ) {
+					delete channelSubs[ subDef.topic ];
+					if ( !_.keys( channelSubs ).length ) {
+						delete this.subscriptions[ subDef.channel ];
+					}
+				}
+				// remove SubscriptionDefinition from postal cache
+				if ( subDef.cacheKeys &#x26;&#x26; subDef.cacheKeys.length ) {
+					var key;
+					while ( key = subDef.cacheKeys.pop() ) {
+						_.each( this.cache[ key ], getCachePurger( subDef, key, this.cache ) );
+					}
+				}
+				if ( typeof _config.resolver.purge === &#x22;function&#x22; ) {
+					// check to see if relevant resolver cache entries can be purged
+					var autoCompact = _config.autoCompactResolver === true ?
+						0 : typeof _config.autoCompactResolver === &#x22;number&#x22; ?
+							( _config.autoCompactResolver - 1 ) : false;
+					if ( autoCompact &#x3e;= 0 &#x26;&#x26; autoCompactIndex === autoCompact ) {
+						_config.resolver.purge( { compact: true } );
+						autoCompactIndex = 0;
+					} else if ( autoCompact &#x3e;= 0 &#x26;&#x26; autoCompactIndex &#x3c; autoCompact ) {
+						autoCompactIndex += 1;
+					}
+				}
+			}
+			if ( _config.enableSystemMessages ) {
+				this.publish( sysRemovedMessage( subDef ) );
+			}
+		}
+	}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+	$( &#x22;#example1&#x22; ).html( &#x22;Name: &#x22; + data.name );
+} );
+
+// And someone publishes a name change:
+channel.publish( &#x22;name.change&#x22;, { name : &#x22;Dr. Who&#x22; } );
+
+// To unsubscribe, you:
+subscription.<span class="apidocCodeKeywordSpan">unsubscribe</span>();
+
+// postal also provides a top-level ability to subscribe/publish
+// used primarily when you don&#x27;t need to hang onto a channel instance:
+var anotherSub = postal.subscribe({
+	channel  : &#x22;MyChannel&#x22;,
+	topic    : &#x22;name.change&#x22;,
+	callback : function(data, envelope) {
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.postal.unsubscribeFor" id="apidoc.element.postal.unsubscribeFor">
+        function <span class="apidocSignatureSpan">postal.</span>unsubscribeFor
+        <span class="apidocSignatureSpan">( options )</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function unsubscribeFor( options ) {
+		var toDispose = [];
+		
+		if ( this.subscriptions ) {
+			toDispose = this.getSubscribersFor( options );
+			this.unsubscribe.apply( this, toDispose );
+		}
+	}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+				activated: activated,
+				skipped: skipped
+			} );
+		}
+	},
+
+	reset: function reset() {
+		this.<span class="apidocCodeKeywordSpan">unsubscribeFor</span>();
+		_config.resolver.reset();
+		this.subscriptions = {};
+		this.cache = {};
+	},
+
+	subscribe: function subscribe( options ) {
+		var subscriptions = this.subscriptions;
+...</pre></li>
+    </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.postal.ChannelDefinition" id="apidoc.module.postal.ChannelDefinition">module postal.ChannelDefinition</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.postal.ChannelDefinition.ChannelDefinition" id="apidoc.element.postal.ChannelDefinition.ChannelDefinition">
+        function <span class="apidocSignatureSpan">postal.</span>ChannelDefinition
+        <span class="apidocSignatureSpan">( channelName, bus )</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">ChannelDefinition = function ( channelName, bus ) {
+	this.bus = bus;
+	this.channel = channelName || _config.DEFAULT_CHANNEL;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+</div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.postal.ChannelDefinition.prototype" id="apidoc.module.postal.ChannelDefinition.prototype">module postal.ChannelDefinition.prototype</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.postal.ChannelDefinition.prototype.publish" id="apidoc.element.postal.ChannelDefinition.prototype.publish">
+        function <span class="apidocSignatureSpan">postal.ChannelDefinition.prototype.</span>publish
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">publish = function () {
+	var envelope = {};
+	var callback;
+	if ( typeof arguments[ 0 ] === &#x22;string&#x22; ) {
+		envelope.topic = arguments[ 0 ];
+		envelope.data = arguments[ 1 ];
+		callback = arguments[ 2 ];
+	} else {
+		envelope = arguments[ 0 ];
+		callback = arguments[ 1 ];
+	}
+	if ( typeof envelope !== &#x22;object&#x22; ) {
+		throw new Error( &#x22;The first argument to ChannelDefinition.publish should be either an envelope object or a string topic.&#x22; );
+	}
+	envelope.headers = _.extend( envelope.headers || { resolverNoCache: _config.resolverNoCache } );
+	envelope.channel = this.channel;
+	this.bus.publish( envelope, callback );
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+		}
+	});
+```
+
+The publisher might do something similar to this:
+
+```javascript
+	postal.<span class="apidocCodeKeywordSpan">publish</span>({
+	    channel: &#x22;orders&#x22;,
+	    topic: &#x22;item.add&#x22;,
+	    data: {
+	        sku: &#x22;AZDTF4346&#x22;,
+	        qty: 21
+	    }
+	});
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.postal.ChannelDefinition.prototype.subscribe" id="apidoc.element.postal.ChannelDefinition.prototype.subscribe">
+        function <span class="apidocSignatureSpan">postal.ChannelDefinition.prototype.</span>subscribe
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">subscribe = function () {
+	return this.bus.subscribe( {
+		channel: this.channel,
+		topic: ( arguments.length === 1 ? arguments[ 0 ].topic : arguments[ 0 ] ),
+		callback: ( arguments.length === 1 ? arguments[ 0 ].callback : arguments[ 1 ] )
+	} );
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+## What is it?
+Postal.js is an in-memory message bus - very loosely inspired by [AMQP](http://www.amqp.org/) - written in JavaScript. Postal.js
+ runs in the browser, or on the server using node.js. It takes the familiar &#x22;eventing-style&#x22; paradigm (of which most JavaScript
+ developers are familiar) and extends it by providing &#x22;broker&#x22; and subscriber implementations which are more sophisticated
+ than what you typically find in simple event emitting/aggregation.
+
+## Usage - at a glance
+If you want to subscribe to a message, you tell postal what channel and topic to listen on (channel is optional, as postal provides
+ a default one if you don&#x27;t), and a callback to be invoked when a message arrives:
+
+```javascript
+	var subscription = postal.<span class="apidocCodeKeywordSpan">subscribe</span>({
+		channel: &#x22;orders&#x22;,
+		topic: &#x22;item.add&#x22;,
+		callback: function(data, envelope) {
+			// `data` is the data published by the publisher.
+			// `envelope` is a wrapper around the data &#x26; contains
+			// metadata about the message like the channel, topic,
+			// timestamp and any other data which might have been
+...</pre></li>
+    </ul>
+
+
+</div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.postal.SubscriptionDefinition" id="apidoc.module.postal.SubscriptionDefinition">module postal.SubscriptionDefinition</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.postal.SubscriptionDefinition.SubscriptionDefinition" id="apidoc.element.postal.SubscriptionDefinition.SubscriptionDefinition">
+        function <span class="apidocSignatureSpan">postal.</span>SubscriptionDefinition
+        <span class="apidocSignatureSpan">( channel, topic, callback )</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">SubscriptionDefinition = function ( channel, topic, callback ) {
+	if ( arguments.length !== 3 ) {
+		throw new Error( &#x22;You must provide a channel, topic and callback when creating a SubscriptionDefinition instance.&#x22; );
+	}
+	if ( topic.length === 0 ) {
+		throw new Error( &#x22;Topics cannot be empty&#x22; );
+	}
+	this.channel = channel;
+	this.topic = topic;
+	this.callback = callback;
+	this.pipeline = [];
+	this.cacheKeys = [];
+	this._context = undefined;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+</div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.postal.SubscriptionDefinition.prototype" id="apidoc.module.postal.SubscriptionDefinition.prototype">module postal.SubscriptionDefinition.prototype</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.postal.SubscriptionDefinition.prototype.catch" id="apidoc.element.postal.SubscriptionDefinition.prototype.catch">
+        function <span class="apidocSignatureSpan">postal.SubscriptionDefinition.prototype.</span>catch
+        <span class="apidocSignatureSpan">( errorHandler )</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">catch = function ( errorHandler ) {
+		var original = this.callback;
+		var safeCallback = function() {
+			try {
+				original.apply( this, arguments );
+			} catch ( err ) {
+				errorHandler( err, arguments[ 0 ] );
+			}
+		};
+		this.callback = safeCallback;
+		return this;
+	}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+		if ( console ) {
+			var report;
+			if ( console.warn ) {
+				report = console.warn;
+			} else {
+				report = console.log;
+			}
+			this.<span class="apidocCodeKeywordSpan">catch</span>( report );
+		}
+		return this;
+	},
+
+	once: function once() {
+		return this.disposeAfter( 1 );
+	},
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.postal.SubscriptionDefinition.prototype.constraint" id="apidoc.element.postal.SubscriptionDefinition.prototype.constraint">
+        function <span class="apidocSignatureSpan">postal.SubscriptionDefinition.prototype.</span>constraint
+        <span class="apidocSignatureSpan">( predicate )</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function constraint( predicate ) {
+		if ( typeof predicate !== &#x22;function&#x22; ) {
+			throw new Error( &#x22;Predicate constraint must be a function&#x22; );
+		}
+		this.pipeline.push( function( data, env, next ) {
+			if ( predicate.call( this, data, env ) ) {
+				next( data, env );
+			}
+		} );
+		return this;
+	}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+			next( data, env );
+			dispose();
+		} );
+		return this;
+	},
+
+	distinct: function distinct() {
+		return this.<span class="apidocCodeKeywordSpan">constraint</span>( new DistinctPredicate() );
+	},
+
+	distinctUntilChanged: function distinctUntilChanged() {
+		return this.constraint( new ConsecutiveDistinctPredicate() );
+	},
+
+	invokeSubscriber: function invokeSubscriber( data, env ) {
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.postal.SubscriptionDefinition.prototype.constraints" id="apidoc.element.postal.SubscriptionDefinition.prototype.constraints">
+        function <span class="apidocSignatureSpan">postal.SubscriptionDefinition.prototype.</span>constraints
+        <span class="apidocSignatureSpan">( predicates )</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function constraints( predicates ) {
+		var self = this;
+		
+		_.each( predicates, function( predicate ) {
+			self.constraint( predicate );
+		} );
+		return self;
+	}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.postal.SubscriptionDefinition.prototype.context" id="apidoc.element.postal.SubscriptionDefinition.prototype.context">
+        function <span class="apidocSignatureSpan">postal.SubscriptionDefinition.prototype.</span>context
+        <span class="apidocSignatureSpan">( context )</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function contextSetter( context ) {
+		this._context = context;
+		return this;
+	}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.postal.SubscriptionDefinition.prototype.debounce" id="apidoc.element.postal.SubscriptionDefinition.prototype.debounce">
+        function <span class="apidocSignatureSpan">postal.SubscriptionDefinition.prototype.</span>debounce
+        <span class="apidocSignatureSpan">( milliseconds, immediate )</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function debounce( milliseconds, immediate ) {
+		if ( typeof milliseconds !== &#x22;number&#x22; ) {
+			throw new Error( &#x22;Milliseconds must be a number&#x22; );
+		}
+
+		var options = {};
+
+		if ( !!immediate === true ) {
+			options.leading = true;
+			options.trailing = false;
+		}
+
+		this.pipeline.push(
+			_.debounce( function( data, env, next ) {
+				next( data, env );
+			},
+				milliseconds,
+				options
+			)
+		);
+		return this;
+	}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+
+		if ( !!immediate === true ) {
+			options.leading = true;
+			options.trailing = false;
+		}
+
+		this.pipeline.push(
+			_.<span class="apidocCodeKeywordSpan">debounce</span>( function( data, env, next ) {
+				next( data, env );
+			},
+				milliseconds,
+				options
+			)
+		);
+		return this;
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.postal.SubscriptionDefinition.prototype.defer" id="apidoc.element.postal.SubscriptionDefinition.prototype.defer">
+        function <span class="apidocSignatureSpan">postal.SubscriptionDefinition.prototype.</span>defer
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function defer() {
+		return this.delay( 0 );
+	}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.postal.SubscriptionDefinition.prototype.delay" id="apidoc.element.postal.SubscriptionDefinition.prototype.delay">
+        function <span class="apidocSignatureSpan">postal.SubscriptionDefinition.prototype.</span>delay
+        <span class="apidocSignatureSpan">( milliseconds )</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function delay( milliseconds ) {
+		if ( typeof milliseconds !== &#x22;number&#x22; ) {
+			throw new Error( &#x22;Milliseconds must be a number&#x22; );
+		}
+		var self = this;
+		self.pipeline.push( function( data, env, next ) {
+			setTimeout( function() {
+				next( data, env );
+			}, milliseconds );
+		} );
+		return this;
+	}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+			}
+		};
+		this.callback = safeCallback;
+		return this;
+	},
+
+	defer: function defer() {
+		return this.<span class="apidocCodeKeywordSpan">delay</span>( 0 );
+	},
+
+	disposeAfter: function disposeAfter( maxCalls ) {
+		if ( typeof maxCalls !== &#x22;number&#x22; || maxCalls &#x3c;= 0 ) {
+			throw new Error( &#x22;The value provided to disposeAfter (maxCalls) must be a number greater than zero.&#x22; );
+		}
+		var dispose = _.after( maxCalls, this.unsubscribe.bind( this ) );
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.postal.SubscriptionDefinition.prototype.disposeAfter" id="apidoc.element.postal.SubscriptionDefinition.prototype.disposeAfter">
+        function <span class="apidocSignatureSpan">postal.SubscriptionDefinition.prototype.</span>disposeAfter
+        <span class="apidocSignatureSpan">( maxCalls )</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function disposeAfter( maxCalls ) {
+		if ( typeof maxCalls !== &#x22;number&#x22; || maxCalls &#x3c;= 0 ) {
+			throw new Error( &#x22;The value provided to disposeAfter (maxCalls) must be a number greater than zero.&#x22; );
+		}
+		var dispose = _.after( maxCalls, this.unsubscribe.bind( this ) );
+		this.pipeline.push( function( data, env, next ) {
+			next( data, env );
+			dispose();
+		} );
+		return this;
+	}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+			}
+			this.catch( report );
+		}
+		return this;
+	},
+
+	once: function once() {
+		return this.<span class="apidocCodeKeywordSpan">disposeAfter</span>( 1 );
+	},
+
+	subscribe: function subscribe( callback ) {
+		this.callback = callback;
+		return this;
+	},
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.postal.SubscriptionDefinition.prototype.distinct" id="apidoc.element.postal.SubscriptionDefinition.prototype.distinct">
+        function <span class="apidocSignatureSpan">postal.SubscriptionDefinition.prototype.</span>distinct
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function distinct() {
+		return this.constraint( new DistinctPredicate() );
+	}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.postal.SubscriptionDefinition.prototype.distinctUntilChanged" id="apidoc.element.postal.SubscriptionDefinition.prototype.distinctUntilChanged">
+        function <span class="apidocSignatureSpan">postal.SubscriptionDefinition.prototype.</span>distinctUntilChanged
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function distinctUntilChanged() {
+		return this.constraint( new ConsecutiveDistinctPredicate() );
+	}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+
+### Applying distinctUntilChanged to a subscription
+
+```javascript
+var dupChannel = postal.channel( &#x22;Blink&#x22; ),
+    dupSubscription = dupChannel.subscribe( &#x22;WeepingAngel.#&#x22;, function( data ) {
+                          $( &#x27;&#x3c;li&#x3e;&#x27; + data.value + &#x27;&#x3c;/li&#x3e;&#x27; ).appendTo( &#x22;#example4&#
+x22; );
+                      }).<span class="apidocCodeKeywordSpan">distinctUntilChanged</span>();
+// demonstrating multiple channels per topic being used
+// You can do it this way if you like, but the example above has nicer syntax (and *much* less overhead)
+dupChannel.publish( &#x22;WeepingAngel.DontBlink&#x22;, { value:&#x22;Don&#x27;t Blink&#x22; } );
+dupChannel.publish( &#x22;WeepingAngel.DontBlink&#x22;, { value:&#x22;Don&#x27;t Blink&#x22; } );
+dupChannel.publish( &#x22;WeepingAngel.DontEvenBlink&#x22;, { value:&#x22;Don&#x27;t Even Blink&#x22; } );
+dupChannel.publish( &#x22;WeepingAngel.DontBlink&#x22;, { value:&#x22;Don&#x27;t Close Your Eyes&#x22; } );
+dupChannel.publish( &#x22;WeepingAngel.DontBlink&#x22;, { value:&#x22;Don&#x27;t Blink&#x22; } );
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.postal.SubscriptionDefinition.prototype.invokeSubscriber" id="apidoc.element.postal.SubscriptionDefinition.prototype.invokeSubscriber">
+        function <span class="apidocSignatureSpan">postal.SubscriptionDefinition.prototype.</span>invokeSubscriber
+        <span class="apidocSignatureSpan">( data, env )</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function invokeSubscriber( data, env ) {
+		if ( !this.inactive ) {
+			var self = this;
+			var pipeline = self.pipeline;
+			var len = pipeline.length;
+			var context = self._context;
+			var idx = -1;
+			var invoked = false;
+			if ( !len ) {
+				self.callback.call( context, data, env );
+				invoked = true;
+			} else {
+				pipeline = pipeline.concat( [ self.callback ] );
+				var step = function step( d, e ) {
+					idx += 1;
+					if ( idx &#x3c; len ) {
+						pipeline[ idx ].call( context, d, e, step );
+					} else {
+						self.callback.call( context, d, e );
+						invoked = true;
+					}
+				};
+				step( data, env, 0 );
+			}
+			return invoked;
+		}
+	}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+		var activated = 0;
+		if ( !cache ) {
+			var cacherFn = getCacher(
+				topic,
+				this.cache,
+				cacheKey,
+				function( candidate ) {
+					if ( candidate.<span class="apidocCodeKeywordSpan">invokeSubscriber</span>( envelope.data, envelope ) ) {
+						activated++;
+					} else {
+						skipped++;
+					}
+				},
+				envelope
+			);
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.postal.SubscriptionDefinition.prototype.logError" id="apidoc.element.postal.SubscriptionDefinition.prototype.logError">
+        function <span class="apidocSignatureSpan">postal.SubscriptionDefinition.prototype.</span>logError
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function logError() {
+		
+		if ( console ) {
+			var report;
+			if ( console.warn ) {
+				report = console.warn;
+			} else {
+				report = console.log;
+			}
+			this.catch( report );
+		}
+		return this;
+	}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.postal.SubscriptionDefinition.prototype.once" id="apidoc.element.postal.SubscriptionDefinition.prototype.once">
+        function <span class="apidocSignatureSpan">postal.SubscriptionDefinition.prototype.</span>once
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function once() {
+		return this.disposeAfter( 1 );
+	}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.postal.SubscriptionDefinition.prototype.subscribe" id="apidoc.element.postal.SubscriptionDefinition.prototype.subscribe">
+        function <span class="apidocSignatureSpan">postal.SubscriptionDefinition.prototype.</span>subscribe
+        <span class="apidocSignatureSpan">( callback )</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function subscribe( callback ) {
+		this.callback = callback;
+		return this;
+	}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+## What is it?
+Postal.js is an in-memory message bus - very loosely inspired by [AMQP](http://www.amqp.org/) - written in JavaScript. Postal.js
+ runs in the browser, or on the server using node.js. It takes the familiar &#x22;eventing-style&#x22; paradigm (of which most JavaScript
+ developers are familiar) and extends it by providing &#x22;broker&#x22; and subscriber implementations which are more sophisticated
+ than what you typically find in simple event emitting/aggregation.
+
+## Usage - at a glance
+If you want to subscribe to a message, you tell postal what channel and topic to listen on (channel is optional, as postal provides
+ a default one if you don&#x27;t), and a callback to be invoked when a message arrives:
+
+```javascript
+	var subscription = postal.<span class="apidocCodeKeywordSpan">subscribe</span>({
+		channel: &#x22;orders&#x22;,
+		topic: &#x22;item.add&#x22;,
+		callback: function(data, envelope) {
+			// `data` is the data published by the publisher.
+			// `envelope` is a wrapper around the data &#x26; contains
+			// metadata about the message like the channel, topic,
+			// timestamp and any other data which might have been
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.postal.SubscriptionDefinition.prototype.throttle" id="apidoc.element.postal.SubscriptionDefinition.prototype.throttle">
+        function <span class="apidocSignatureSpan">postal.SubscriptionDefinition.prototype.</span>throttle
+        <span class="apidocSignatureSpan">( milliseconds )</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function throttle( milliseconds ) {
+		if ( typeof milliseconds !== &#x22;number&#x22; ) {
+			throw new Error( &#x22;Milliseconds must be a number&#x22; );
+		}
+		var fn = function( data, env, next ) {
+			next( data, env );
+		};
+		this.pipeline.push( _.throttle( fn, milliseconds ) );
+		return this;
+	}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+	throttle: function throttle( milliseconds ) {
+		if ( typeof milliseconds !== &#x22;number&#x22; ) {
+			throw new Error( &#x22;Milliseconds must be a number&#x22; );
+		}
+		var fn = function( data, env, next ) {
+			next( data, env );
+		};
+		this.pipeline.push( _.<span class="apidocCodeKeywordSpan">throttle</span>( fn, milliseconds ) );
+		return this;
+	}
+};
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.postal.SubscriptionDefinition.prototype.unsubscribe" id="apidoc.element.postal.SubscriptionDefinition.prototype.unsubscribe">
+        function <span class="apidocSignatureSpan">postal.SubscriptionDefinition.prototype.</span>unsubscribe
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function unsubscribe() {
+		
+		if ( !this.inactive ) {
+			postal.unsubscribe( this );
+		}
+	}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+	$( &#x22;#example1&#x22; ).html( &#x22;Name: &#x22; + data.name );
+} );
+
+// And someone publishes a name change:
+channel.publish( &#x22;name.change&#x22;, { name : &#x22;Dr. Who&#x22; } );
+
+// To unsubscribe, you:
+subscription.<span class="apidocCodeKeywordSpan">unsubscribe</span>();
+
+// postal also provides a top-level ability to subscribe/publish
+// used primarily when you don&#x27;t need to hang onto a channel instance:
+var anotherSub = postal.subscribe({
+	channel  : &#x22;MyChannel&#x22;,
+	topic    : &#x22;name.change&#x22;,
+	callback : function(data, envelope) {
+...</pre></li>
+    </ul>
+
+
+</div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.postal.postal_lodash" id="apidoc.module.postal.postal_lodash">module postal.postal_lodash</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.postal.postal_lodash.ChannelDefinition" id="apidoc.element.postal.postal_lodash.ChannelDefinition">
+        function <span class="apidocSignatureSpan">postal.postal_lodash.</span>ChannelDefinition
+        <span class="apidocSignatureSpan">( channelName, bus )</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">ChannelDefinition = function ( channelName, bus ) {
+	this.bus = bus;
+	this.channel = channelName || _config.DEFAULT_CHANNEL;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.postal.postal_lodash.SubscriptionDefinition" id="apidoc.element.postal.postal_lodash.SubscriptionDefinition">
+        function <span class="apidocSignatureSpan">postal.postal_lodash.</span>SubscriptionDefinition
+        <span class="apidocSignatureSpan">( channel, topic, callback )</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">SubscriptionDefinition = function ( channel, topic, callback ) {
+	if ( arguments.length !== 3 ) {
+		throw new Error( &#x22;You must provide a channel, topic and callback when creating a SubscriptionDefinition instance.&#x22; );
+	}
+	if ( topic.length === 0 ) {
+		throw new Error( &#x22;Topics cannot be empty&#x22; );
+	}
+	this.channel = channel;
+	this.topic = topic;
+	this.callback = callback;
+	this.pipeline = [];
+	this.cacheKeys = [];
+	this._context = undefined;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.postal.postal_lodash.addWireTap" id="apidoc.element.postal.postal_lodash.addWireTap">
+        function <span class="apidocSignatureSpan">postal.postal_lodash.</span>addWireTap
+        <span class="apidocSignatureSpan">( callback )</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function addWireTap( callback ) {
+		var self = this;
+		self.wireTaps.push( callback );
+		return function() {
+			var idx = self.wireTaps.indexOf( callback );
+			if ( idx !== -1 ) {
+				self.wireTaps.splice( idx, 1 );
+			}
+		};
+	}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.postal.postal_lodash.channel" id="apidoc.element.postal.postal_lodash.channel">
+        function <span class="apidocSignatureSpan">postal.postal_lodash.</span>channel
+        <span class="apidocSignatureSpan">( channelName )</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function channel( channelName ) {
+		return new ChannelDefinition( channelName, this );
+	}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+
+### Channels? WAT?
+A channel is a logical partition of topics. Conceptually, it&#x27;s like a dedicated highway for a specific set of communication
+. At first glance it might seem like that&#x27;s overkill for an environment that runs in an event loop, but it actually proves
+to be quite useful. Every library has architectural opinions that it either imposes or nudges you toward. Channel-oriented messaging
+ nudges you to separate your communication by bounded context, and enables the kind of fine-tuned visibility you need into the interactions
+ between components as your application grows.
+
+While the above code snippets work just fine, it&#x27;s possible to get a more terse API if you want to hang onto an `ChannelDefinition
+` instance - which is really a convenience wrapper around publishing and subscribing on a specific channel (instead of having to
+ specify it each time):
+
+```javascript
+	var channel = postal.<span class="apidocCodeKeywordSpan">channel</span>(&#x22;orders&#x22;);
+
+	var subscription = channel.subscribe(&#x22;item.add&#x22;, function(data, envelope) {
+		/*do stuff with data */
+	});
+
+	channel.publish(&#x22;item.add&#x22;, {
+sku: &#x22;AZDTF4346&#x22;,
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.postal.postal_lodash.getSubscribersFor" id="apidoc.element.postal.postal_lodash.getSubscribersFor">
+        function <span class="apidocSignatureSpan">postal.postal_lodash.</span>getSubscribersFor
+        <span class="apidocSignatureSpan">( options )</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function getSubscribersFor( options ) {
+		var result = [];
+		var self = this;
+		_.each( self.subscriptions, function( channel ) {
+			_.each( channel, function( subList ) {
+				result = result.concat( _.filter( subList, getPredicate( options, _config.resolver ) ) );
+			} );
+		} );
+		return result;
+	}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+					( typeof options.binding === &#x22;undefined&#x22; || options.binding === binding ) ) {
+				delete self.cache[ key ];
+			}
+		};
+
+		var compactPredicate = function( val, key ) {
+			var split = key.split( keyDelimiter );
+			if ( postal.<span class="apidocCodeKeywordSpan">getSubscribersFor</span>( { topic: split[ 0 ] } ).length === 0 ) {
+				delete self.cache[ key ];
+			}
+		};
+
+		if ( typeof options === &#x22;undefined&#x22; ) {
+			this.reset();
+		} else {
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.postal.postal_lodash.noConflict" id="apidoc.element.postal.postal_lodash.noConflict">
+        function <span class="apidocSignatureSpan">postal.postal_lodash.</span>noConflict
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function noConflict() {
+		
+		if ( typeof window === &#x22;undefined&#x22; || ( typeof window !== &#x22;undefined&#x22; &#x26;&#x26; typeof define === &#x22;function&#x22; &#x26;&#x26; define.amd ) ) {
+			throw new Error( &#x22;noConflict can only be used in browser clients which aren&#x27;t using AMD modules&#x22; );
+		}
+		global.postal = prevPostal;
+		return this;
+	}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.postal.postal_lodash.publish" id="apidoc.element.postal.postal_lodash.publish">
+        function <span class="apidocSignatureSpan">postal.postal_lodash.</span>publish
+        <span class="apidocSignatureSpan">( envelope, cb )</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function publish( envelope, cb ) {
+		++pubInProgress;
+		var channel = envelope.channel = envelope.channel || _config.DEFAULT_CHANNEL;
+		var topic = envelope.topic;
+		envelope.timeStamp = new Date();
+		if ( this.wireTaps.length ) {
+			_.each( this.wireTaps, function( tap ) {
+				tap( envelope.data, envelope, pubInProgress );
+			} );
+		}
+		var cacheKey = channel + _config.cacheKeyDelimiter + topic;
+		var cache = this.cache[ cacheKey ];
+		var skipped = 0;
+		var activated = 0;
+		if ( !cache ) {
+			var cacherFn = getCacher(
+				topic,
+				this.cache,
+				cacheKey,
+				function( candidate ) {
+					if ( candidate.invokeSubscriber( envelope.data, envelope ) ) {
+						activated++;
+					} else {
+						skipped++;
+					}
+				},
+				envelope
+			);
+			_.each( this.subscriptions[ channel ], function( candidates ) {
+				_.each( candidates, cacherFn );
+			} );
+		} else {
+			_.each( cache, function( subDef ) {
+				if ( subDef.invokeSubscriber( envelope.data, envelope ) ) {
+					activated++;
+				} else {
+					skipped++;
+				}
+			} );
+		}
+		if ( --pubInProgress === 0 ) {
+			clearUnSubQueue();
+		}
+		if ( cb ) {
+			cb( {
+				activated: activated,
+				skipped: skipped
+			} );
+		}
+	}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+		}
+	});
+```
+
+The publisher might do something similar to this:
+
+```javascript
+	postal.<span class="apidocCodeKeywordSpan">publish</span>({
+	    channel: &#x22;orders&#x22;,
+	    topic: &#x22;item.add&#x22;,
+	    data: {
+	        sku: &#x22;AZDTF4346&#x22;,
+	        qty: 21
+	    }
+	});
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.postal.postal_lodash.reset" id="apidoc.element.postal.postal_lodash.reset">
+        function <span class="apidocSignatureSpan">postal.postal_lodash.</span>reset
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function reset() {
+		this.unsubscribeFor();
+		_config.resolver.reset();
+		this.subscriptions = {};
+		this.cache = {};
+	}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+			var split = key.split( keyDelimiter );
+			if ( postal.getSubscribersFor( { topic: split[ 0 ] } ).length === 0 ) {
+				delete self.cache[ key ];
+			}
+		};
+
+		if ( typeof options === &#x22;undefined&#x22; ) {
+			this.<span class="apidocCodeKeywordSpan">reset</span>();
+		} else {
+			var handler = options.compact === true ? compactPredicate : matchPredicate;
+			_.each( this.cache, handler );
+		}
+	}
+};
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.postal.postal_lodash.subscribe" id="apidoc.element.postal.postal_lodash.subscribe">
+        function <span class="apidocSignatureSpan">postal.postal_lodash.</span>subscribe
+        <span class="apidocSignatureSpan">( options )</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function subscribe( options ) {
+		var subscriptions = this.subscriptions;
+		var subDef = new SubscriptionDefinition( options.channel || _config.DEFAULT_CHANNEL, options.topic, options.callback );
+		var channel = subscriptions[ subDef.channel ];
+		var channelLen = subDef.channel.length;
+		var subs;
+		if ( !channel ) {
+			channel = subscriptions[ subDef.channel ] = {};
+		}
+		subs = subscriptions[ subDef.channel ][ subDef.topic ];
+		if ( !subs ) {
+			subs = subscriptions[ subDef.channel ][ subDef.topic ] = [];
+		}
+		// First, add the SubscriptionDefinition to the channel list
+		subs.push( subDef );
+		// Next, add the SubscriptionDefinition to any relevant existing cache(s)
+		var cache = this.cache;
+		_.each( _.keys( cache ), function( cacheKey ) {
+			if ( cacheKey.substr( 0, channelLen ) === subDef.channel ) {
+				getCacher(
+					cacheKey.split( _config.cacheKeyDelimiter )[1],
+					cache,
+					cacheKey )( subDef );
+			}
+		} );
+		
+		if ( _config.enableSystemMessages ) {
+			this.publish( sysCreatedMessage( subDef ) );
+		}
+		return subDef;
+	}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+## What is it?
+Postal.js is an in-memory message bus - very loosely inspired by [AMQP](http://www.amqp.org/) - written in JavaScript. Postal.js
+ runs in the browser, or on the server using node.js. It takes the familiar &#x22;eventing-style&#x22; paradigm (of which most JavaScript
+ developers are familiar) and extends it by providing &#x22;broker&#x22; and subscriber implementations which are more sophisticated
+ than what you typically find in simple event emitting/aggregation.
+
+## Usage - at a glance
+If you want to subscribe to a message, you tell postal what channel and topic to listen on (channel is optional, as postal provides
+ a default one if you don&#x27;t), and a callback to be invoked when a message arrives:
+
+```javascript
+	var subscription = postal.<span class="apidocCodeKeywordSpan">subscribe</span>({
+		channel: &#x22;orders&#x22;,
+		topic: &#x22;item.add&#x22;,
+		callback: function(data, envelope) {
+			// `data` is the data published by the publisher.
+			// `envelope` is a wrapper around the data &#x26; contains
+			// metadata about the message like the channel, topic,
+			// timestamp and any other data which might have been
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.postal.postal_lodash.unsubscribe" id="apidoc.element.postal.postal_lodash.unsubscribe">
+        function <span class="apidocSignatureSpan">postal.postal_lodash.</span>unsubscribe
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function unsubscribe() {
+		var unSubLen = arguments.length;
+		var unSubIdx = 0;
+		var subDef;
+		var channelSubs;
+		var topicSubs;
+		var idx;
+		for ( ; unSubIdx &#x3c; unSubLen; unSubIdx++ ) {
+			subDef = arguments[ unSubIdx ];
+			subDef.inactive = true;
+			if ( pubInProgress ) {
+				unSubQueue.push( subDef );
+				return;
+			}
+			channelSubs = this.subscriptions[ subDef.channel ];
+			topicSubs = channelSubs &#x26;&#x26; channelSubs[ subDef.topic ];
+			
+			if ( topicSubs ) {
+				var len = topicSubs.length;
+				idx = 0;
+				// remove SubscriptionDefinition from channel list
+				while ( idx &#x3c; len ) {
+					
+					if ( topicSubs[ idx ] === subDef ) {
+						topicSubs.splice( idx, 1 );
+						break;
+					}
+					idx += 1;
+				}
+				if ( topicSubs.length === 0 ) {
+					delete channelSubs[ subDef.topic ];
+					if ( !_.keys( channelSubs ).length ) {
+						delete this.subscriptions[ subDef.channel ];
+					}
+				}
+				// remove SubscriptionDefinition from postal cache
+				if ( subDef.cacheKeys &#x26;&#x26; subDef.cacheKeys.length ) {
+					var key;
+					while ( key = subDef.cacheKeys.pop() ) {
+						_.each( this.cache[ key ], getCachePurger( subDef, key, this.cache ) );
+					}
+				}
+				if ( typeof _config.resolver.purge === &#x22;function&#x22; ) {
+					// check to see if relevant resolver cache entries can be purged
+					var autoCompact = _config.autoCompactResolver === true ?
+						0 : typeof _config.autoCompactResolver === &#x22;number&#x22; ?
+							( _config.autoCompactResolver - 1 ) : false;
+					if ( autoCompact &#x3e;= 0 &#x26;&#x26; autoCompactIndex === autoCompact ) {
+						_config.resolver.purge( { compact: true } );
+						autoCompactIndex = 0;
+					} else if ( autoCompact &#x3e;= 0 &#x26;&#x26; autoCompactIndex &#x3c; autoCompact ) {
+						autoCompactIndex += 1;
+					}
+				}
+			}
+			if ( _config.enableSystemMessages ) {
+				this.publish( sysRemovedMessage( subDef ) );
+			}
+		}
+	}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+	$( &#x22;#example1&#x22; ).html( &#x22;Name: &#x22; + data.name );
+} );
+
+// And someone publishes a name change:
+channel.publish( &#x22;name.change&#x22;, { name : &#x22;Dr. Who&#x22; } );
+
+// To unsubscribe, you:
+subscription.<span class="apidocCodeKeywordSpan">unsubscribe</span>();
+
+// postal also provides a top-level ability to subscribe/publish
+// used primarily when you don&#x27;t need to hang onto a channel instance:
+var anotherSub = postal.subscribe({
+	channel  : &#x22;MyChannel&#x22;,
+	topic    : &#x22;name.change&#x22;,
+	callback : function(data, envelope) {
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.postal.postal_lodash.unsubscribeFor" id="apidoc.element.postal.postal_lodash.unsubscribeFor">
+        function <span class="apidocSignatureSpan">postal.postal_lodash.</span>unsubscribeFor
+        <span class="apidocSignatureSpan">( options )</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function unsubscribeFor( options ) {
+		var toDispose = [];
+		
+		if ( this.subscriptions ) {
+			toDispose = this.getSubscribersFor( options );
+			this.unsubscribe.apply( this, toDispose );
+		}
+	}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+				activated: activated,
+				skipped: skipped
+			} );
+		}
+	},
+
+	reset: function reset() {
+		this.<span class="apidocCodeKeywordSpan">unsubscribeFor</span>();
+		_config.resolver.reset();
+		this.subscriptions = {};
+		this.cache = {};
+	},
+
+	subscribe: function subscribe( options ) {
+		var subscriptions = this.subscriptions;
+...</pre></li>
+    </ul>
+
+
+
+
+
+
+
+
+
+
+</div>
+
+<div class="apidocFooterDiv">
+    [ this document was created with
+    <a href="https://github.com/kaizhu256/node-utility2" target="_blank">utility2</a>
+    ]
+</div>
+</div>
