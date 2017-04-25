@@ -1,6 +1,6 @@
 # npmdoc-postal
 
-#### api documentation for  [postal (v2.0.5)](http://github.com/postaljs/postal.js)  [![npm package](https://img.shields.io/npm/v/npmdoc-postal.svg?style=flat-square)](https://www.npmjs.org/package/npmdoc-postal) [![travis-ci.org build-status](https://api.travis-ci.org/npmdoc/node-npmdoc-postal.svg)](https://travis-ci.org/npmdoc/node-npmdoc-postal)
+#### basic api documentation for  [postal (v2.0.5)](http://github.com/postaljs/postal.js)  [![npm package](https://img.shields.io/npm/v/npmdoc-postal.svg?style=flat-square)](https://www.npmjs.org/package/npmdoc-postal) [![travis-ci.org build-status](https://api.travis-ci.org/npmdoc/node-npmdoc-postal.svg)](https://travis-ci.org/npmdoc/node-npmdoc-postal)
 
 #### Pub/Sub library providing wildcard subscriptions, complex message handling, etc.  Works server and client-side.
 
